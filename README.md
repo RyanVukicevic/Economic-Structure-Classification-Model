@@ -12,11 +12,17 @@ This team project turns decades of World Input-Output Database (WIOD) transactio
 
 [Explore the notebook](econ_input_output.ipynb) · [Read the presentation](Economic%20Input-Output%20Model.pdf) · [Results & methodology](docs/methodology.md) · [Setup & reproduction](docs/reproduction.md)
 
-## A look inside
+## What we built
 
-![China's 2000 interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/current-sector-heatmap.png)
+Our goal was to understand how industry relationships differ across economies and test whether those patterns distinguish geographic regions over time. We cleaned the transaction data, made it explorable through country/year queries, and converted sector relationships into features for classification and clustering.
 
-*A freshly executed notebook output from the country/year query: China, 2000. Flows are shown in billions of current US dollars; the fixed color scale saturates at 50 billion.*
+![Project workflow: WIOD tables are cleaned into country-year data for interactive charts and Leontief matrices. The matrices provide 529 features for KNN and decision-tree classification, plus PCA and K-means exploration.](docs/images/project-workflow.svg)
+
+The economic model relates total output **x**, intermediate input coefficients **A**, and final demand **y**:
+
+$$x = Ax + y, \qquad L = (I-A)^{-1}, \qquad x = Ly$$
+
+Each 23 × 23 Leontief matrix becomes a 529-feature representation of a country's sector relationships. The team compared three regional labels—Europe, Asia-Pacific, and Americas—and explored alternative East/West groupings.
 
 ## My contribution
 
@@ -29,15 +35,11 @@ I'm **[Ryan Vukicevic](https://github.com/RyanVukicevic)**. I led our three-pers
 
 The modeling results below are **team outcomes**. The project was completed with **Lawrence Ho** and **Paolo Gervasoni**; see [team credits](docs/credits.md).
 
-## What we built
+## A look inside
 
-![Project workflow: WIOD tables are cleaned into country-year data for interactive charts and Leontief matrices. The matrices provide 529 features for KNN and decision-tree classification, plus PCA and K-means exploration.](docs/images/project-workflow.svg)
+![China's 2000 interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/current-sector-heatmap.png)
 
-The economic model relates total output **x**, intermediate input coefficients **A**, and final demand **y**:
-
-$$x = Ax + y, \qquad L = (I-A)^{-1}, \qquad x = Ly$$
-
-Each 23 × 23 Leontief matrix becomes a 529-feature representation of a country's sector relationships. The team compared three regional labels—Europe, Asia-Pacific, and Americas—and explored alternative East/West groupings.
+*A freshly executed notebook output from the country/year query: China, 2000. Flows are shown in billions of current US dollars; the fixed color scale saturates at 50 billion.*
 
 ## Verified local run
 
