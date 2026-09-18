@@ -31,17 +31,7 @@ The modeling results below are **team outcomes**. The project was completed with
 
 ## What we built
 
-```mermaid
-flowchart LR
-    A[WIOD transaction tables] --> B[Clean and label country-year data]
-    B --> C[Interactive heatmaps and sector charts]
-    B --> D[Leontief inverse matrices]
-    D --> E[529 features per country-year]
-    E --> F[KNN and decision trees]
-    E --> G[PCA and K-means]
-    F --> H[Regional classification and later-year evaluation]
-    G --> I[Structure and class-imbalance analysis]
-```
+![Project workflow: WIOD tables are cleaned into country-year data for interactive charts and Leontief matrices. The matrices provide 529 features for KNN and decision-tree classification, plus PCA and K-means exploration.](docs/images/project-workflow.svg)
 
 The economic model relates total output **x**, intermediate input coefficients **A**, and final demand **y**:
 
