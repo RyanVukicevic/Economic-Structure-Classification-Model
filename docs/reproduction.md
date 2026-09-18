@@ -1,86 +1,82 @@
-# Viewing and reproducing the project
+# Run the project locally
 
-## View without installing anything
+Place `lr_wiod_wiot_wide.csv` beside `econ_input_output.ipynb`. The notebook reads this local file directly; no Google Drive account or precomputed pickle is needed.
 
-Open the [presentation](../Economic%20Input-Output%20Model.pdf), [notebook](../econ_input_output.ipynb), or the figures embedded in the [README](../README.md). Saved visual outputs are included; most ML results are documented in the presentation rather than saved notebook outputs.
-
-## Current reproducibility status
-
-The supplied files contain the original notebook, its Colab Python export, and the presentation. They do **not** include:
-
-- `lr_wiod_wiot_wide.csv`, the raw input used by the notebook.
-- `L_matrix_dict.pkl`, the precomputed country/year Leontief matrices used by the modeling cells.
-- A package lockfile or the original runtime's exact library versions.
-
-The original analysis has not been rerun for this portfolio. The dependency list is a reconstruction from imports, not a tested recreation of the original environment. A successful `pip install` alone does not make the notebook runnable end to end.
-
-## Restore the data
-
-1. Visit the official [Long-run WIOD page](https://www.rug.nl/ggdc/valuechain/long-run-wiod) and download **WIOTs in current prices → Excel**. Select the long-run dataset rather than the separate 2016 WIOD release.
-2. The original workflow converted the workbook's third sheet to CSV using `xlsx2csv`:
-
-   ```bash
-   xlsx2csv -s 3 lr_wiod_wiot_wide.xlsx lr_wiod_wiot_wide.csv
-   ```
-
-   Verify the sheet and resulting header against the downloaded workbook. The notebook expects `year`, `row_country`, `row_isic3`, and country-prefixed industry/final-demand columns, such as `USA_AtB` and `USA_xCONS_h`.
-
-3. In Google Drive, place the CSV under `My Drive/CS439 Final Project/`, or edit the notebook's input path to your chosen location.
-4. Restore the original trusted matrix cache if available. Its expected structure is:
-
-   ```python
-   L_matrix_dict[country_code][year] = {
-       "matrix": ...,   # NumPy array, shape (23, 23)
-       "labeled": ...,  # Pandas dataframe with sector row/column labels
-   }
-   ```
-
-   Rebuilding the cache requires resolving the matrix-construction concerns in [methodology](methodology.md); reproducing the slide metrics cannot be guaranteed from the supplied files. Only load a pickle from a trusted source because deserialization executes Python objects.
-
-## Restore the notebook environment
-
-The original environment was **Google Colab**. Upload the notebook and install the analysis dependencies in a setup cell (upload `requirements.txt` as well):
-
-```python
-%pip install -r requirements.txt
-```
-
-Run the import and Drive-mount cells, then update any `/content/drive/...` paths. Create the directory used by the chart export (`MyDrive/figures`) before running that cell, or change its output path.
-
-For local inspection, create a virtual environment and install dependencies:
+## Setup
 
 ```bash
 python -m venv .venv
-# Windows PowerShell:
+# Windows PowerShell
 .venv\Scripts\Activate.ps1
 # macOS / Linux: source .venv/bin/activate
 python -m pip install -r requirements.txt
+```
+
+## Execute the complete notebook
+
+```bash
+python run_notebook.py
+```
+
+The runner starts a fresh kernel with the same Python environment, executes every code cell, saves the notebook with its new charts/results, and writes `outputs/run_summary.json`. It fails on the first error and saves a diagnostic notebook under `outputs/failed-notebook.ipynb` rather than reporting a partial execution as successful.
+
+Alternatively, open the notebook in JupyterLab and use **Restart Kernel and Run All Cells**:
+
+```bash
 python -m jupyterlab econ_input_output.ipynb
 ```
 
-For local execution, also remove the Colab Drive mount and replace Drive paths with local paths. The `.py` file is an original Colab export, not a standalone CLI: it includes notebook-specific commands and interactive prompts.
+The notebook's working directory must be this repository. Select the environment where you installed the dependencies. The final demo cells supply example country/year values so a complete execution never waits for input.
 
-## Interactive functions
+The synchronized Python export also supports:
 
-After restoring inputs and running the relevant preparation/function-definition cells, the notebook exposes:
-
-```python
-heatmap("CHN", 2000)   # Domestic interindustry flows, billions of USD
-heatmap_demo()         # Prompt for country and year
-leontief_demo()        # Prompt for country/year and show sector linkage scores
+```bash
+python econ_input_output.py
 ```
 
-The heatmap requires the imports, sector mapping, country subsetting, sector aliases, and heatmap definitions. It does not require the precomputed ML cache. The Leontief chart additionally needs the Leontief pipeline definitions and the corrections described in the methodology notes.
+This displays figures through your Matplotlib backend. For unattended script execution, set `MPLBACKEND=Agg` in your shell; the notebook runner already uses an inline backend.
 
-The archived notebook is exploratory and relies on shared state. In particular, the PCA temporal-evaluation helper uses `precision_score`, `recall_score`, and `f1_score` before their later import; import those metrics before calling it. Several function names are redefined in later experiments. Review section dependencies before running individual cells.
+## Inputs and generated files
 
-## Figure provenance
+| File | Purpose |
+| --- | --- |
+| `lr_wiod_wiot_wide.csv` | Local WIOD input; excluded from Git because of its size |
+| `L_matrix_dict.pkl` | Rebuilt on every execution from the CSV: 900 country-year matrices with numeric arrays and labeled dataframes |
+| `outputs/run_summary.json` | Completed-run record, data SHA-256, package versions, and printed metrics |
+| `outputs/region_count_barplot.pdf` | Regional coverage figure |
+| `outputs/knn_results_per_year.png` | Tuning curves for every year |
+| `econ_input_output.ipynb` | Executed analysis, visualizations, and saved results |
 
-The files in `docs/images/` were decoded directly from existing PNG outputs in the original notebook. No data or plots were regenerated:
+The cache is generated locally and never loaded from an external pickle. Country-year blocks are checked for 23 aligned sectors, finite values, positive gross output, and consistency of the input-output and inverse identities. Modeling still has the limitations described in [methodology](methodology.md).
 
-| File | Original cell index (zero-based) | Content |
-| --- | ---: | --- |
-| `sector-heatmap.png` | 140 | China, 2000, transaction heatmap |
-| `sector-linkages.png` | 138 | Saved Leontief sector-score chart; chart country label is affected by the original global-variable issue |
-| `final-demand-trends.png` | 16 | Final-demand component plots across countries |
-| `regional-coverage.png` | 18 | Country counts per region |
+## Query a country and year
+
+After running the notebook, use:
+
+```python
+heatmap("CHN", 2000)
+leontief("USA", 2000)
+heatmap_demo()                  # Interactive country/year prompts
+leontief_demo()                 # Interactive country/year prompts
+heatmap_demo("GBR", 1990)       # Equivalent nonblocking query
+```
+
+Use a three-letter country code from the dataset and a year from 1965 through 2000. Invalid queries raise a clear error.
+
+## Obtain the data on another computer
+
+Download **WIOTs in current prices ? Excel** from the official [Long-run WIOD page](https://www.rug.nl/ggdc/valuechain/long-run-wiod). Convert the third sheet of `lr_wiod_wiot_wide.xlsx` using:
+
+```bash
+xlsx2csv -s 3 lr_wiod_wiot_wide.xlsx lr_wiod_wiot_wide.csv
+```
+
+Check the header for `year`, `row_country`, `row_isic3`, country-prefixed industry and final-demand columns, and `xTOT_xGO` (reported gross output). The project uses Long-run WIOD version 1.1, not the separate WIOD 2016 release. Attribute the dataset as described in [credits](credits.md).
+
+## Historical artifacts
+
+The presentation retains the original course results. The original notebook and Python export are available in [the initial showcase commit](https://github.com/RyanVukicevic/economic-input-output-model/tree/1fc6abf). The current versions include local execution fixes and corrected matrix/clustering calculations, so their results need not match the slides.
+
+The four files in `docs/images/` are historical PNG outputs extracted from the original notebook (zero-based cells 16, 18, 138, and 140). Newly executed figures are available within the current notebook; the original sector-score image can have an incorrect country label because of the old global-variable issue.
+
+The `current-sector-heatmap.png` and `current-sector-linkages.png` previews were extracted from the successful local rerun. The latest full run executed 81 code cells with zero errors in 331.51 seconds and saved 54 charts.

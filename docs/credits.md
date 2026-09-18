@@ -14,7 +14,7 @@ Ryan reports that the team placed **first among 30+ teams** and presented to **2
 
 ## Portfolio packaging
 
-The notebook, Python export, and presentation retain the original project content. The README, supporting documentation, dependency list, and extracted chart previews were added when preparing this repository as a portfolio showcase. They do not represent additional experiments completed in the course project.
+The presentation retains the original project results. The notebook and synchronized Python export were subsequently adapted for local execution, with matrix construction and clustering corrections documented in the methodology notes. The initial versions remain in Git history. The README, supporting documentation, execution runner, and extracted chart previews were added for this portfolio. New local execution results are separate from experiments reported in the course presentation.
 
 ## Data source
 

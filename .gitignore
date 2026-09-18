@@ -13,5 +13,10 @@ __pycache__/
 *.xlsx
 *.pkl
 *.pickle
+outputs_run.log
+.ipython/
+outputs/failed-notebook.ipynb
+outputs/*.pdf
+outputs/*.png
 .DS_Store
 Thumbs.db

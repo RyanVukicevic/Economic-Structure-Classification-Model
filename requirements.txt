@@ -1,11 +1,14 @@
-# Reconstructed from original imports; exact historical versions are unavailable.
-# These dependencies have not been validated through a full analysis rerun.
-numpy
-pandas
-matplotlib
-seaborn
-scipy
-scikit-learn
-kneed
-jupyterlab
-xlsx2csv
+# Direct dependency versions used for the verified local run (Python 3.12).
+numpy==2.5.3
+pandas==3.0.5
+matplotlib==3.11.1
+seaborn==0.13.2
+scipy==1.18.1
+scikit-learn==1.9.0
+kneed==0.8.6
+jupyterlab==4.6.3
+xlsx2csv==0.8.6
+requests==2.34.2
+nbformat==5.11.1
+nbclient==0.11.0
+ipykernel==7.3.0

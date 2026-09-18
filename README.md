@@ -14,9 +14,9 @@ This team project turns decades of World Input-Output Database (WIOD) transactio
 
 ## A look inside
 
-![China's 2000 interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/sector-heatmap.png)
+![China's 2000 interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/current-sector-heatmap.png)
 
-*An original notebook output from the interactive country/year query: China, 2000. Flows are shown in billions of current US dollars; the fixed color scale saturates at 50 billion.*
+*A freshly executed notebook output from the country/year query: China, 2000. Flows are shown in billions of current US dollars; the fixed color scale saturates at 50 billion.*
 
 ## My contribution
 
@@ -49,7 +49,25 @@ $$x = Ax + y, \qquad L = (I-A)^{-1}, \qquad x = Ly$$
 
 Each 23 × 23 Leontief matrix becomes a 529-feature representation of a country's sector relationships. The team compared three regional labels—Europe, Asia-Pacific, and Americas—and explored alternative East/West groupings.
 
-## Selected findings
+## Verified local run
+
+**81 code cells executed successfully ? 900 matrices validated ? 54 saved charts ? 0 execution errors**
+
+The restored project ran end to end in approximately **5? minutes** on the local environment. It reads the CSV directly and rebuilds its matrix cache automatically.
+
+| Experiment | New test accuracy | Evaluation |
+| --- | ---: | --- |
+| KNN, full Leontief features | **93.2%** | Train 1965?1990; evaluate 1991?2000 |
+| KNN with 7-component PCA | **84.4%** | Same temporal split |
+| Decision tree | **97.2%** | Random 80/20 country-year split |
+
+These are exploratory rerun results after the documented corrections, with remaining evaluation limitations described below. See the [execution record](outputs/run_summary.json) for the input checksum, package versions, and recorded metrics.
+
+![Freshly executed sector linkage scores for USA, 2000](docs/images/current-sector-linkages.png)
+
+*The country/year query also produces a sector summary. This chart averages row and column means of the Leontief matrix; it is a descriptive linkage score, not a causal importance measure.*
+
+## Original presentation findings
 
 The following are **results reported in the original presentation**, not newly reproduced benchmarks.
 
@@ -63,7 +81,7 @@ The following are **results reported in the original presentation**, not newly r
 - **Compression had a measurable tradeoff.** The PCA variant reduced temporal test accuracy by **8.4 percentage points**, suggesting that the retained components did not preserve all useful classification information in this experiment.
 - **Clustering exposed a different challenge.** K-means did not recover the three geographic regions cleanly; larger classes dominated many assignments. Region coverage was uneven: 14 European, 7 Asia-Pacific, and 4 Americas countries.
 
-Random splits include repeated observations of the same countries, and some original preprocessing occurs before splitting. The original clustering code also refits on evaluation data in its subset experiments. These results are exploratory; [methodology notes](docs/methodology.md) explain the evaluation limits and an identified matrix-construction issue.
+These are historical slide results. The current notebook rebuilds matrices from the local CSV using reported gross output and corrects the clustering refit/PCA bugs. Its new results are saved separately from the presentation. Random splits still include repeated countries, and some preprocessing occurs before splitting; see [methodology notes](docs/methodology.md) for the remaining limitations.
 
 ## Explore the project
 
@@ -78,7 +96,18 @@ Random splits include repeated observations of the same countries, and some orig
 | Class imbalance and alternative labels | Presentation, slides **40–49** |
 | Technical details and limitations | [Methodology](docs/methodology.md) |
 
-The original notebook ran in Google Colab with data stored in Google Drive. The raw CSV and precomputed matrix cache are not included, so this repository currently supports **browsing the original work**, while a complete rerun requires restoring those inputs and addressing the documented setup issues. See [reproduction instructions](docs/reproduction.md).
+## Run locally
+
+Place `lr_wiod_wiot_wide.csv` in the repository folder, install the dependencies in a Python virtual environment, then run:
+
+```bash
+python -m pip install -r requirements.txt
+python run_notebook.py
+```
+
+This executes the full notebook in a fresh kernel, rebuilds all **900 Leontief matrices**, saves charts and model outputs in the notebook, and writes a verification record to [`outputs/run_summary.json`](outputs/run_summary.json). No Google Drive mount or precomputed cache is required. The dataset stays local because it exceeds GitHub's normal file-size limit; [setup instructions](docs/reproduction.md) explain how to obtain it on another computer.
+
+For interactive exploration, open `econ_input_output.ipynb` in JupyterLab and run all cells. Call `heatmap_demo()` or `leontief_demo()` to query a country and year; the default demo cells use examples so Run All does not wait for input.
 
 <details>
 <summary><strong>More original visualizations: demand trends and regional coverage</strong></summary>
@@ -96,10 +125,12 @@ The original notebook ran in Google Colab with data stored in Google Drive. The 
 ## Repository guide
 
 ```text
-econ_input_output.ipynb          Original team notebook and saved outputs
-econ_input_output.py             Original Colab Python export
+econ_input_output.ipynb          Locally runnable team notebook and new outputs
+econ_input_output.py             Synchronized local Python export
+run_notebook.py                  Fresh-kernel execution and verification record
 Economic Input-Output Model.pdf  Original team presentation
-requirements.txt                Analysis dependencies for restoring the environment
+requirements.txt                Local analysis and notebook dependencies
+outputs/run_summary.json        Completed-run record and recorded metrics
 docs/
   methodology.md                Results, experiment design, and limitations
   reproduction.md               Data requirements and execution notes
@@ -113,4 +144,4 @@ Data: [Long-run WIOD, University of Groningen](https://www.rug.nl/ggdc/valuechai
 
 Required data attribution: Woltjer, P., Gouma, R., and Timmer, M. P. (2021), *Long-run World Input-Output Database: Version 1.1 Sources and Methods*, GGDC Research Memorandum 190. [Dataset DOI](https://doi.org/10.34894/A7AXDN).
 
-The original notebook, export, and presentation are preserved as course-project artifacts. Portfolio documentation and extracted figure previews were added afterward. Competition placement and audience size are reported by Ryan; the repository does not contain separate award documentation. Dataset terms and team attribution are detailed in [credits](docs/credits.md).
+The presentation and preview images preserve the course-project results. The notebook and Python export have since been adapted for local execution and corrected where documented; original versions remain in Git history. Portfolio documentation was added afterward. Competition placement and audience size are reported by Ryan; the repository does not contain separate award documentation. Dataset terms and team attribution are detailed in [credits](docs/credits.md).

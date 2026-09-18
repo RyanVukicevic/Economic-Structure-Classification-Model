@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-18T16:45:57.593846+00:00",
+  "elapsed_seconds": 331.51,
+  "executed_code_cells": 81,
+  "errors": 0,
+  "csv_sha256": "70defd3c4ebbf3d4dc952e5036a24737c89d4937b02303bb106f5801372f1932",
+  "python": "3.12.10",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "matplotlib": "3.11.1",
+    "seaborn": "0.13.2",
+    "kneed": "0.8.6",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0",
+    "ipykernel": "7.3.0"
+  },
+  "recorded_metrics": [
+    {
+      "cell": 76,
+      "output": "Train Accuracy: 0.9986111111111111\nTest Accuracy: 0.9722222222222222\n"
+    },
+    {
+      "cell": 80,
+      "output": "Train Accuracy: 1.0\nTest Accuracy: 0.932\n\nMisclassified future-year cases:\n"
+    },
+    {
+      "cell": 88,
+      "output": "Train Accuracy: 1.0\nTest Accuracy: 0.844\n\nMisclassified future-year cases:\n\n=== Confusion Matrix Metrics (Future Years Evaluation) ===\nAccuracy: 0.844\nPrecision (macro): 0.8894966173603945\nRecall (macro): 0.7892857142857143\nF1 Score (macro): 0.8222309545670373\n---------------------------------------------------------\n\n"
+    },
+    {
+      "cell": 121,
+      "output": "Train Accuracy: 1.0\nTest Accuracy: 0.98\n\nMisclassified future-year cases:\nTrain Accuracy: 1.0\nTest Accuracy: 0.912\n\nMisclassified future-year cases:\n"
+    },
+    {
+      "cell": 124,
+      "output": "\n=== Confusion Matrix Metrics (Whole Data) ===\nAccuracy: 0.8033333333333333\nPrecision (macro): 0.7344417225137607\nRecall (macro): 0.7597465886939572\nF1 Score (macro): 0.744809279779059\n-------------------------------------------\n\n\n=== Confusion Matrix Metrics (Subset Year) ===\nAccuracy: 0.856\nPrecision (macro): 0.839498510427011\nRecall (macro): 0.7399122807017544\nF1 Score (macro): 0.7715504112092598\n--------------------------------------------\n\n\n=== Confusion Matrix Metrics (Whole Data) ===\nAccuracy: 0.79\nPrecision (macro): 0.7396099968843736\nRecall (macro): 0.7401895943562611\nF1 Score (macro): 0.7398983141557399\n-------------------------------------------\n\n\n=== Confusion Matrix Metrics (Subset Year) ===\nAccuracy: 0.816\nPrecision (macro): 0.8159136047666335\nRecall (macro): 0.7019841269841269\nF1 Score (macro): 0.7283635676492819\n--------------------------------------------\n\n"
+    }
+  ]
+}
