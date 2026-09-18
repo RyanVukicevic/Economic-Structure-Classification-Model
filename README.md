@@ -41,13 +41,13 @@ Each 23 × 23 Leontief matrix becomes a 529-feature representation of a country'
 
 ## Verified local run
 
-**81 code cells executed successfully ? 900 matrices validated ? 54 saved charts ? 0 execution errors**
+**81 code cells executed successfully | 900 matrices validated | 54 saved charts | 0 execution errors**
 
-The restored project ran end to end in approximately **5? minutes** on the local environment. It reads the CSV directly and rebuilds its matrix cache automatically.
+The restored project ran end to end in approximately **5.5 minutes** on the local environment. It reads the CSV directly and rebuilds its matrix cache automatically.
 
 | Experiment | New test accuracy | Evaluation |
 | --- | ---: | --- |
-| KNN, full Leontief features | **93.2%** | Train 1965?1990; evaluate 1991?2000 |
+| KNN, full Leontief features | **93.2%** | Train 1965-1990; evaluate 1991-2000 |
 | KNN with 7-component PCA | **84.4%** | Same temporal split |
 | Decision tree | **97.2%** | Random 80/20 country-year split |
 
