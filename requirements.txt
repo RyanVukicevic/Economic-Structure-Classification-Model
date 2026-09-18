@@ -1,0 +1,11 @@
+# Reconstructed from original imports; exact historical versions are unavailable.
+# These dependencies have not been validated through a full analysis rerun.
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+scikit-learn
+kneed
+jupyterlab
+xlsx2csv

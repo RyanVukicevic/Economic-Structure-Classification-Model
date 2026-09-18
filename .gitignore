@@ -1,0 +1,17 @@
+# Local reference material and tooling
+Ryan-Vukicevic-Resume.pdf
+.portfolio_tools/
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.env.*
+
+# Download data separately; do not commit local datasets or caches
+*.csv
+*.xlsx
+*.pkl
+*.pickle
+.DS_Store
+Thumbs.db
