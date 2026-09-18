@@ -1,6 +1,6 @@
 # Economic Input-Output Model
 
-**Exploring how industries connect—and what those connections reveal about regional economies.**
+**Exploring how industries connect, and what those connections reveal about regional economies.**
 
 Rutgers University · CS 439 · December 2025
 
