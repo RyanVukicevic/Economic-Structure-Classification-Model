@@ -65,7 +65,7 @@ All three charts include same-sector transactions and exclude cross-border flows
 
 ### Comparing Domestic Production Networks: Heatmaps for 2000
 
-How do the individual industry relationships differ across countries? These heatmaps query the notebook for **USA, China, and Germany in 2000**, providing an Americas, Asia-Pacific, and Europe example from the regions used in our classification models. Russia is not included in this dataset.
+How do the individual industry relationships differ across countries? These heatmaps query the notebook for **USA, China, and Germany in 2000**, providing an Americas, Asia-Pacific, and Europe example from the regions used in our classification models. Germany was the world's third-largest economy by nominal GDP in 2000, after the USA and Japan ([World Bank, GDP in current US dollars](https://databank.worldbank.org/GDP-nominal-1972-2009/id/4cbd752b)). This selection keeps the requested USA/China comparison and adds Germany; it is not a comparison of the three largest economies. Russia is not included in this dataset.
 
 Each cell shows a producing sector's sales to a consuming sector in **billions of current USD**: rows sell and columns buy. Read across a row to see a sector's buyers, or down a column to see its suppliers. These are original domestic transactions, including same-sector flows; cross-border trade and final demand are excluded.
 
