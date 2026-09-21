@@ -15,18 +15,18 @@ from matplotlib.ticker import StrMethodFormatter
 
 ROOT = Path(__file__).resolve().parent
 SECTORS = {
-    'AtB': 'Agriculture & fishing', 'C': 'Mining & quarrying',
-    'D15t16': 'Food, beverages & tobacco', 'D17t19': 'Textiles & leather',
-    'D21t22': 'Paper & printing', 'D23': 'Petroleum & nuclear fuel',
-    'D24': 'Chemicals', 'D25': 'Rubber & plastics',
-    'D26': 'Non-metallic minerals', 'D27t28': 'Metals',
-    'D29': 'Machinery', 'D30t33': 'Electrical & optical equipment',
-    'D34t35': 'Transport equipment', 'Dnec': 'Other manufacturing',
-    'E': 'Electricity, gas & water', 'F': 'Construction',
-    'G': 'Wholesale & retail trade', 'H': 'Hotels & restaurants',
-    'I60t63': 'Transport & storage', 'I64': 'Post & telecommunications',
-    'J': 'Finance', 'K': 'Real estate & business services',
-    'LtQ': 'Public & other services',  # Includes administration, education, and health.
+    'AtB': 'Agriculture & Fishing', 'C': 'Mining & Quarrying',
+    'D15t16': 'Food, Beverages & Tobacco', 'D17t19': 'Textiles & Leather',
+    'D21t22': 'Paper & Printing', 'D23': 'Petroleum & Nuclear Fuel',
+    'D24': 'Chemicals', 'D25': 'Rubber & Plastics',
+    'D26': 'Non-Metallic Minerals', 'D27t28': 'Metals',
+    'D29': 'Machinery', 'D30t33': 'Electrical & Optical Equipment',
+    'D34t35': 'Transport Equipment', 'Dnec': 'Other Manufacturing',
+    'E': 'Electricity, Gas & Water', 'F': 'Construction',
+    'G': 'Wholesale & Retail Trade', 'H': 'Hotels & Restaurants',
+    'I60t63': 'Transport & Storage', 'I64': 'Post & Telecommunications',
+    'J': 'Finance', 'K': 'Real Estate & Business Services',
+    'LtQ': 'Public & Other Services',  # Includes administration, education, and health.
 }
 COLORS = {'producer': '#287c8e', 'consumer': '#b86a30', 'combined': '#7255a0'}
 
@@ -95,9 +95,10 @@ def plot_country_year(panel, country='USA', year=2000):
     with plt.rc_context({'font.family': 'DejaVu Sans', 'font.size': 10}):
         fig, ax = plt.subplots(figsize=(13, 10))
         ax.barh([SECTORS[s] for s in scores.index], scores.combined, color=COLORS['combined'])
-        ax.set_title(f'Average raw sector transactions | {country.upper()}, {year}\n'
-                     'Mean of producer row average and consumer column average', fontsize=15, pad=18)
-        ax.set_xlabel('Billions of current USD per partner sector')
+        ax.set_title(f'Average Raw Sector Transactions | {country.upper()}, {year}\n'
+                     'Mean of Producer Row Average and Consumer Column Average', fontsize=15, pad=18)
+        ax.set_ylabel('Sector')
+        ax.set_xlabel('Billions of Current USD per Partner Sector')
         ax.xaxis.set_major_formatter(StrMethodFormatter('{x:,.1f}'))
         for i, value in enumerate(scores.combined):
             ax.text(value, i, f'  {value:,.2f}', va='center', fontsize=9)
@@ -112,14 +113,15 @@ def plot_pooled(panel, role='producer'):
     if role not in COLORS:
         raise ValueError('role must be producer, consumer, or combined')
     values = pooled_scores(panel)[role].sort_values()
-    titles = {'producer': 'Producer ranking: sales to domestic industries',
-              'consumer': 'Consumer ranking: purchases from domestic industries',
-              'combined': 'Combined ranking: average of sales and purchases'}
+    titles = {'producer': 'Producer Ranking: Sales to Domestic Industries',
+              'consumer': 'Consumer Ranking: Purchases from Domestic Industries',
+              'combined': 'Combined Ranking: Average of Sales and Purchases'}
     with plt.rc_context({'font.family': 'DejaVu Sans', 'font.size': 10}):
         fig, ax = plt.subplots(figsize=(13, 10))
         ax.barh([SECTORS[s] for s in values.index], values, color=COLORS[role])
-        ax.set_title(titles[role] + '\n25 countries | 1965-2000 cumulative totals', fontsize=15, pad=18)
-        ax.set_xlabel('Cumulative billions of current USD (sum across 36 years)')
+        ax.set_title(titles[role] + '\n25 Countries | 1965-2000 Cumulative Totals', fontsize=15, pad=18)
+        ax.set_ylabel('Sector')
+        ax.set_xlabel('Cumulative Billions of Current USD (Sum Across 36 Years)')
         for i, value in enumerate(values):
             ax.text(value, i, f'  {value:,.0f}', va='center', fontsize=9)
         ax.set_xlim(0, values.max() * 1.17)
