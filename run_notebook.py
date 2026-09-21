@@ -23,7 +23,7 @@ def main():
     os.environ['IPYTHONDIR'] = str(ROOT / '.ipython')
     output = ROOT / 'outputs'
     output.mkdir(exist_ok=True)
-    path = ROOT / 'econ_input_output.ipynb'
+    path = ROOT / 'economic_structure_classification_model.ipynb'
     notebook = nbformat.read(path, as_version=4)
     for cell in notebook.cells:
         if cell.cell_type == 'code':

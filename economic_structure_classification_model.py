@@ -1,4 +1,4 @@
-# Generated from econ_input_output.ipynb. Run from any directory.
+# Generated from economic_structure_classification_model.ipynb. Run from any directory.
 
 # %% Notebook cell 1
 # Data source: https://www.rug.nl/ggdc/valuechain/long-run-wiod
@@ -19,6 +19,8 @@ from IPython.display import display
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 np.random.seed(42)
 plt.rcParams['figure.dpi'] = 90
+
+from visualizations import plot_sector_linkages, plot_tree_importance
 
 plt.show()
 plt.close('all')
@@ -581,7 +583,8 @@ def L_avgs(sample_labeled:pd.DataFrame) -> pd.DataFrame:
   -for each sector in the sample_labeled df, which is from compute_L()
   intended only for use after compute_L() is called
   returns dataframe "avgs" with cols Row_Avg, Col_Avg, Avg_of_Avgs (average of the two)
-  sorted by Avg_of_Avgs, so most interconnected (important) listed first
+  Values are unitless averages of Leontief coefficients, including the diagonal.
+  The plotting helper sorts scores; these are not monetary transaction flows.
   2nd fn in L_pipeline()
   """
 
@@ -610,32 +613,11 @@ plt.show()
 plt.close('all')
 
 # %% Notebook cell 31
-def L_avgs_plot(L_country:pd.DataFrame, L_year:int, avgs:pd.DataFrame) -> None:
-  """
-  takes outputs from compute_L, L_avgs and plots sectors and their avg of avgs
-  for the (country, year, avgs) specified
-  3rd fn in L_pipeline()
-  """
+def L_avgs_plot(L_country: pd.DataFrame, L_year: int, avgs: pd.DataFrame) -> None:
+    country = next(k for k, frame in country_dfs.items() if frame is L_country)
+    plot_sector_linkages(avgs, sector_aliases, country, L_year)
+    plt.show()
 
-  #have the df, but need the name which is a key in country_dfs
-  country = next((k for k, v in country_dfs.items() if v is L_country), None)
-  year=L_year
-
-  #x=sector_aliases.values() is from dict defined above for display
-  #otherwise x axis is crowded
-
-  font = 'DejaVu Serif'
-  sns.set_theme(font=font)
-
-  plt.figure(figsize=(12,8))
-  sns.barplot(data=avgs, y=sector_aliases.values(), x=avgs['Avg_of_Avgs'])
-  plt.title(f"From Leontief Model: Aggregate Mean Scores for Sectors ({country}, {year})")
-  plt.xlabel("Average of (Row, Col) Averages per Sector")
-  plt.ylabel("Sectors")
-  plt.show(block=False)
-
-
-  print("\n\n")
 plt.show()
 plt.close('all')
 
@@ -1263,14 +1245,10 @@ tree = DecisionTreeClassifier(
     class_weight="balanced", random_state=42
 )
 tree.fit(X_train, y_train)
-imp = tree.feature_importances_
-idx = np.argsort(imp)[::-1][:20]   # top 20 features
-
-plt.figure(figsize=(10,6))
-plt.barh([X_df.columns[i] for i in idx], imp[idx])
-plt.title("Top 20 Most Important Sector-to-Sector Flows")
-plt.gca().invert_yaxis()
+plot_tree_importance(tree, X_df.columns, sector_aliases, 'Europe / Asia-Pacific / Americas',
+                     years, len(countries), len(X_train))
 plt.show()
+
 plt.show()
 plt.close('all')
 
@@ -2160,13 +2138,9 @@ def fit_tree(ytype):
       class_weight="balanced", random_state=42
   )
   tree.fit(X_train, y_train)
-  imp = tree.feature_importances_
-  idx = np.argsort(imp)[::-1][:20]   # top 20 features
-
-  plt.figure(figsize=(10,6))
-  plt.barh([X_df.columns[i] for i in idx], imp[idx])
-  plt.title(f"Top 20 Most Important Sector-to-Sector Flows- {ytype}")
-  plt.gca().invert_yaxis()
+  plot_tree_importance(tree, X_df.columns, sector_aliases, f'{ytype} East / West',
+                       years, len(countries), len(X_train))
+  plt.show()
 
   plt.figure(figsize=(24,14))  # Larger figure for slides
   sktree.plot_tree(

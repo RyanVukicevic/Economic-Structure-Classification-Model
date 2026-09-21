@@ -1,4 +1,4 @@
-# Economic Input-Output Model
+# Economic Structure Classification Model
 
 **Exploring how industries connect, and what those connections reveal about regional economies.**
 
@@ -10,7 +10,7 @@ This team project turns decades of World Input-Output Database (WIOD) transactio
 
 **25 countries · 23 sectors · 1965–2000 · Python / Pandas / NumPy / scikit-learn / Matplotlib / Seaborn**
 
-[Explore the notebook](econ_input_output.ipynb) · [Read the presentation](Economic%20Input-Output%20Model.pdf) · [Results & methodology](docs/methodology.md) · [Setup & reproduction](docs/reproduction.md)
+[Explore the notebook](economic_structure_classification_model.ipynb) · [Read the presentation](Economic%20Structure%20Classification%20Model.pdf) · [Results & methodology](docs/methodology.md) · [Setup & reproduction](docs/reproduction.md)
 
 ## What we built
 
@@ -45,7 +45,7 @@ The modeling results below are **team outcomes**. The project was completed with
 
 **81 code cells executed successfully | 900 matrices validated | 54 saved charts | 0 execution errors**
 
-The restored project ran end to end in approximately **5.5 minutes** on the local environment. It reads the CSV directly and rebuilds its matrix cache automatically.
+The restored project ran end to end in approximately **3.6 minutes** on the local environment. It reads the CSV directly and rebuilds its matrix cache automatically.
 
 | Experiment | New test accuracy | Evaluation |
 | --- | ---: | --- |
@@ -57,7 +57,9 @@ These are exploratory rerun results after the documented corrections, with remai
 
 ![Freshly executed sector linkage scores for USA, 2000](docs/images/current-sector-linkages.png)
 
-*The country/year query also produces a sector summary. This chart averages row and column means of the Leontief matrix; it is a descriptive linkage score, not a causal importance measure.*
+*The country/year query also produces a sector summary. This chart averages row and column means of the Leontief matrix; it is a **unitless** descriptive linkage score, not billions of dollars or a causal importance measure. Raw WIOD transactions are in millions of current USD; the heatmap converts those transactions to billions.*
+
+[How to read the chart units and model feature rankings](docs/reading-the-charts.md)
 
 ## Original presentation findings
 
@@ -77,7 +79,7 @@ These are historical slide results. The current notebook rebuilds matrices from 
 
 ## Explore the project
 
-**No setup needed:** open the [52-slide presentation](Economic%20Input-Output%20Model.pdf) for the complete story or browse the [notebook](econ_input_output.ipynb) for the implementation and saved visual outputs.
+**No setup needed:** open the [52-slide presentation](Economic%20Structure%20Classification%20Model.pdf) for the complete story or browse the [notebook](economic_structure_classification_model.ipynb) for the implementation and saved visual outputs.
 
 | Interested in… | Start here |
 | --- | --- |
@@ -99,7 +101,7 @@ python run_notebook.py
 
 This executes the full notebook in a fresh kernel, rebuilds all **900 Leontief matrices**, saves charts and model outputs in the notebook, and writes a verification record to [`outputs/run_summary.json`](outputs/run_summary.json). No Google Drive mount or precomputed cache is required. The dataset stays local because it exceeds GitHub's normal file-size limit; [setup instructions](docs/reproduction.md) explain how to obtain it on another computer.
 
-For interactive exploration, open `econ_input_output.ipynb` in JupyterLab and run all cells. Call `heatmap_demo()` or `leontief_demo()` to query a country and year; the default demo cells use examples so Run All does not wait for input.
+For interactive exploration, open `economic_structure_classification_model.ipynb` in JupyterLab and run all cells. Call `heatmap_demo()` or `leontief_demo()` to query a country and year; the default demo cells use examples so Run All does not wait for input.
 
 <details>
 <summary><strong>More original visualizations: demand trends and regional coverage</strong></summary>
@@ -117,17 +119,14 @@ For interactive exploration, open `econ_input_output.ipynb` in JupyterLab and ru
 ## Repository guide
 
 ```text
-econ_input_output.ipynb          Locally runnable team notebook and new outputs
-econ_input_output.py             Synchronized local Python export
-run_notebook.py                  Fresh-kernel execution and verification record
-Economic Input-Output Model.pdf  Original team presentation
-requirements.txt                Local analysis and notebook dependencies
-outputs/run_summary.json        Completed-run record and recorded metrics
-docs/
-  methodology.md                Results, experiment design, and limitations
-  reproduction.md               Data requirements and execution notes
-  credits.md                    Contributions and source attribution
-  images/                       Figures extracted from saved notebook outputs
+economic_structure_classification_model.ipynb   Executed notebook
+economic_structure_classification_model.py      Synchronized Python export
+visualizations.py                               Chart labels and presentation
+run_notebook.py                                 Fresh-kernel execution and verification
+Economic Structure Classification Model.pdf     Original team presentation
+requirements.txt                                Local dependencies
+outputs/run_summary.json                        Run record and metrics
+docs/                                           Methodology, chart guide, setup, and credits
 ```
 
 ## Data and acknowledgments

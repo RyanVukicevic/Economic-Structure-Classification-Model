@@ -1,6 +1,6 @@
 # Team credits and attribution
 
-**Economic Input-Output Model** was completed by **Group 23**, Rutgers University **CS 439, Fall 2025**.
+**Economic Structure Classification Model** was completed by **Group 23**, Rutgers University **CS 439, Fall 2025**.
 
 | Team member | Contribution information |
 | --- | --- |
