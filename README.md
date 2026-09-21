@@ -65,7 +65,7 @@ All three charts include same-sector transactions and exclude cross-border flows
 
 ### Comparing Domestic Production Networks: Heatmaps for 2000
 
-How do the individual industry relationships differ across countries? These heatmaps query the notebook for **USA, China, and Germany in 2000**, providing an Americas, Asia-Pacific, and Europe example from the regions used in our classification models. Germany was the world's third-largest economy by nominal GDP in 2000, after the USA and Japan ([World Bank, GDP in current US dollars](https://databank.worldbank.org/GDP-nominal-1972-2009/id/4cbd752b)). This selection keeps the requested USA/China comparison and adds Germany; it is not a comparison of the three largest economies. Russia is not included in this dataset.
+How do the individual industry relationships differ across countries? These heatmaps query the notebook for **USA, China, and the UK in 2000**, providing an Americas, Asia-Pacific, and Europe example from the regions used in our classification models.
 
 Each cell shows a producing sector's sales to a consuming sector in **billions of current USD**: rows sell and columns buy. Read across a row to see a sector's buyers, or down a column to see its suppliers. These are original domestic transactions, including same-sector flows; cross-border trade and final demand are excluded.
 
@@ -83,11 +83,11 @@ All three use **the same sector order and linear $0-50 billion scale**. Light me
 
 *Red identifies China. Compare manufacturing-sector cells and the Construction column with the corresponding positions in the USA heatmap to explore differences in domestic supply relationships.*
 
-#### Germany, 2000
+#### UK, 2000
 
-![Germany domestic interindustry transactions in 2000, with a light-to-dark gold scale from 0 to 50 billion current USD](docs/images/heatmap-deu-2000.png)
+![UK domestic interindustry transactions in 2000, with a light-to-dark navy blue scale from 0 to 50 billion current USD](docs/images/heatmap-gbr-2000.png)
 
-*Gold, drawing on Germany's flag, identifies the European example. Compare Metals, Machinery, and Transport Equipment relationships across the three countries.*
+*Navy blue, drawing on the UK's flag, identifies the European example. Compare Finance, Real Estate & Business Services, and manufacturing-sector relationships across the three countries.*
 
 Together, the pooled rankings summarize transaction scale across the full dataset, while these heatmaps reveal the individual country/year relationships from which we build economic-structure features. [More on chart units and interpretation](docs/reading-the-charts.md).
 
