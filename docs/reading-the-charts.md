@@ -15,7 +15,11 @@ The README now displays a raw transaction ranking for USA, 2000. It averages the
 
 `raw_sector_visualizations.py` also generates three review charts pooling all 25 countries and 36 years: producer sales (row sums), consumer purchases (column sums), and the average of those two totals. These are cumulative nominal intermediate transactions, not annual values, household consumption, gross output, or GDP. Same-sector transactions are included; international transactions and final demand are excluded. Larger economies and later nominal-dollar observations contribute more to the totals. The combined measure averages sales and purchases rather than adding them.
 
-The label "Public & other services" abbreviates the source's public administration, education, health, and other services sector. The new pooled previews are saved locally for review; they are not embedded in the README.
+The pooled charts display **trillions of current USD**: the stored totals in billions are divided by 1,000 for plotting. CSV tables remain in billions. The country/year chart still displays billions per partner sector for **one selected country and year**, not an average over all 900 country-years.
+
+For each sector, pooled producer sales sum its domestic row across all 25 countries and all 36 years (1965-2000); pooled consumer purchases do the same with its domestic column. Combined equals `(pooled producer + pooled consumer) / 2`. Adding the two instead would double every combined bar without changing the ranking. An average of the country/year scores across the full panel would instead equal the pooled combined total divided by `25 * 36 * 23`, in billions per partner sector per country-year.
+
+The label "Public & Other Services" abbreviates the source's public administration, education, health, and other services sector. The pooled rankings appear first in the README gallery, followed by the USA, 2000 country/year average and heatmap.
 
 ## Sector linkage chart (modeling notebook)
 

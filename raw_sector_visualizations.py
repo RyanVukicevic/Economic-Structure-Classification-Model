@@ -112,7 +112,8 @@ def plot_country_year(panel, country='USA', year=2000):
 def plot_pooled(panel, role='producer'):
     if role not in COLORS:
         raise ValueError('role must be producer, consumer, or combined')
-    values = pooled_scores(panel)[role].sort_values()
+    # Stored totals are billions; display the cumulative rankings in trillions.
+    values = pooled_scores(panel)[role].sort_values() / 1000
     titles = {'producer': 'Producer Ranking: Sales to Domestic Industries',
               'consumer': 'Consumer Ranking: Purchases from Domestic Industries',
               'combined': 'Combined Ranking: Average of Sales and Purchases'}
@@ -121,12 +122,13 @@ def plot_pooled(panel, role='producer'):
         ax.barh([SECTORS[s] for s in values.index], values, color=COLORS[role])
         ax.set_title(titles[role] + '\n25 Countries | 1965-2000 Cumulative Totals', fontsize=15, pad=18)
         ax.set_ylabel('Sector')
-        ax.set_xlabel('Cumulative Billions of Current USD (Sum Across 36 Years)')
+        ax.set_xlabel('Cumulative Trillions of Current USD (Sum Across 36 Years)')
         for i, value in enumerate(values):
-            ax.text(value, i, f'  {value:,.0f}', va='center', fontsize=9)
+            ax.text(value, i, f'  {value:,.2f}', va='center', fontsize=9)
         ax.set_xlim(0, values.max() * 1.17)
         _finish(fig, ax, 'Domestic intermediate transactions only; same-sector flows included; final demand and cross-border flows excluded.\n'
                         'Nominal-dollar totals favor larger economies and later years. Combined = (sales + purchases) / 2; not GDP.')
+        ax.xaxis.set_major_formatter(StrMethodFormatter('{x:,.1f}'))
     return fig
 
 
@@ -166,6 +168,7 @@ def main():
               'country_year_blocks': 900, 'sectors': 23,
               'scope': 'Sum of domestic blocks; no cross-border flows or final demand',
               'unit': 'billions of current USD',
+              'pooled_chart_unit': 'trillions of current USD',
               'combined_definition': '(producer + consumer) / 2',
               'producer_grand_total': float(totals.producer.sum()),
               'consumer_grand_total': float(totals.consumer.sum()),

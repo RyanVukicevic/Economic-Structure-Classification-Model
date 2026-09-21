@@ -37,9 +37,45 @@ The modeling results below are **team outcomes**. The project was completed with
 
 ## A look inside
 
-![China's 2000 interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/current-sector-heatmap.png)
+### Which Sectors Account for the Most Domestic Industry Trade?
 
-*A freshly executed notebook output from the country/year query: China, 2000. Flows are shown in billions of current US dollars; the fixed color scale saturates at 50 billion.*
+These rankings summarize **25 countries, 23 sectors, and 36 years (1965-2000)** using the original monetary transaction data. They show which sectors account for the largest cumulative sales and purchases within domestic production networks.
+
+For each country and year, we select its domestic 23 x 23 transaction matrix: **rows sell; columns buy**. For each sector, we sum its row to measure producer sales and its column to measure consumer purchases, then add those totals across all **900 country-year observations**. Source values in millions of current USD are converted to **trillions** for the pooled charts.
+
+#### Producer Sales
+
+![Cumulative domestic producer sales by sector across 25 countries, 1965-2000, in trillions of current USD](docs/images/pooled-producer.png)
+
+**Real Estate & Business Services leads with $52.61 trillion**, followed by Wholesale & Retail Trade ($33.61 trillion). This view highlights the sectors supplying the greatest dollar volume of inputs to domestic industries over the observed period.
+
+#### Consumer Purchases
+
+![Cumulative domestic consumer purchases by sector across 25 countries, 1965-2000, in trillions of current USD](docs/images/pooled-consumer.png)
+
+**Public & Other Services leads with $43.13 trillion**, followed by Construction ($29.75 trillion). Here, "consumer" means an industry purchasing inputs, not household spending. This view identifies the sectors drawing the largest dollar volume of inputs from domestic suppliers.
+
+#### Combined Sales and Purchases
+
+![Average of cumulative domestic producer sales and consumer purchases by sector across 25 countries, 1965-2000](docs/images/pooled-combined.png)
+
+Each bar is **(cumulative producer sales + cumulative consumer purchases) / 2**. Real Estate & Business Services ranks first ($41.13 trillion), followed by Public & Other Services ($34.03 trillion). Averaging the two directions gives equal weight to a sector's roles as supplier and buyer; it is a summary measure, not an additional transaction total.
+
+All three charts include same-sector transactions and exclude cross-border flows and final demand such as household purchases. They describe **gross intermediate transactions, not profit, value added, or GDP**. Values are nominal and not inflation-adjusted, so larger economies and later-year dollar amounts carry more weight. Rankings describe transaction scale rather than productivity or real growth.
+
+### A Closer Look: USA, 2000
+
+![Average raw domestic sector transactions for USA, 2000, in billions of current USD](docs/images/raw-sector-averages-usa-2000.png)
+
+*USA, 2000: each bar averages the sector's producer row mean and consumer column mean from the original domestic transaction matrix. Values are **billions of current USD per partner sector**, averaged across 23 sectors including itself. Final demand and cross-border transactions are excluded. These are raw monetary flows, not Leontief coefficients; the Leontief-based analysis remains in the notebook.*
+
+[How to read the chart units and model feature rankings](docs/reading-the-charts.md)
+
+![USA's 2000 domestic interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/current-sector-heatmap.png)
+
+*The heatmap shows the individual transactions behind the USA, 2000 summary: each cell is a producing sector's sales to a consuming sector, in billions of current USD. Darker cells indicate larger flows. The fixed color scale saturates at $50 billion, so cells above that threshold share the darkest color. Reading across a row reveals buyers; reading down a column reveals suppliers.*
+
+The bar charts summarize sector activity; the heatmap exposes the individual relationships behind those summaries. Regenerate these five images with `python docs/render_showcase.py` after [setting up the local dataset](docs/reproduction.md).
 
 ## Verified local run
 
@@ -54,12 +90,6 @@ The restored project ran end to end in approximately **3.6 minutes** on the loca
 | Decision tree | **97.2%** | Random 80/20 country-year split |
 
 These are exploratory rerun results after the documented corrections, with remaining evaluation limitations described below. See the [execution record](outputs/run_summary.json) for the input checksum, package versions, and recorded metrics.
-
-![Average raw domestic sector transactions for USA, 2000, in billions of current USD](docs/images/raw-sector-averages-usa-2000.png)
-
-*USA, 2000: each bar averages the sector's producer row mean and consumer column mean from the original domestic transaction matrix. Values are **billions of current USD per partner sector**, averaged across 23 sectors including itself. Final demand and cross-border transactions are excluded. These are raw monetary flows, not Leontief coefficients; the Leontief-based analysis remains in the notebook.*
-
-[How to read the chart units and model feature rankings](docs/reading-the-charts.md)
 
 ## Original presentation findings
 

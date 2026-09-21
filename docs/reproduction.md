@@ -79,7 +79,7 @@ Check the header for `year`, `row_country`, `row_isic3`, country-prefixed indust
 python raw_sector_visualizations.py --country USA --year 2000
 ```
 
-This runs independently of the ML notebook. It reads the same local CSV and writes four charts and their underlying tables to `outputs/raw-sector-preview/`: a country/year average chart and pooled producer, consumer, and combined rankings for all 25 countries over 1965-2000. The pooled previews remain local pending presentation review. The README's raw USA/2000 image is a copy of that country/year output.
+This runs independently of the ML notebook. It reads the same local CSV and writes four charts and their underlying tables to `outputs/raw-sector-preview/`: a country/year average chart and pooled producer, consumer, and combined rankings for all 25 countries over 1965-2000. The README displays these four rankings and a USA, 2000 heatmap. To regenerate all five README images directly in `docs/images/`, run `python docs/render_showcase.py`. Pooled charts display trillions of current USD; the country/year chart and exported tables use billions.
 
 In a notebook, use the new raw-data query without running the classification experiments:
 
@@ -98,4 +98,4 @@ The presentation file has the new project name; its slides retain the original c
 
 Four previews in `docs/images/` are historical PNG outputs extracted from the original notebook (zero-based cells 16, 18, 138, and 140). Newly executed figures are available within the current notebook; the original sector-score image can have an incorrect country label because of the old global-variable issue.
 
-The `current-sector-heatmap.png` and `current-sector-linkages.png` previews were extracted from the successful local rerun. The latest full run executed 81 code cells with zero errors in 214.25 seconds and saved 54 charts.
+The `current-sector-heatmap.png` preview is regenerated for USA, 2000 by `docs/render_showcase.py` from the original domestic transactions. The unused `current-sector-linkages.png` preview was extracted from the successful local notebook rerun; the README no longer displays the Leontief averages chart. The latest full run executed 81 code cells with zero errors in 214.25 seconds and saved 54 charts.
