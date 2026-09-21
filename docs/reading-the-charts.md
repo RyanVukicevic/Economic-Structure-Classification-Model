@@ -5,13 +5,13 @@ The project uses three different kinds of numbers. Their units are not interchan
 | Visualization | What is plotted | Scale |
 | --- | --- | --- |
 | Transaction heatmap | Domestic transactions from producing sector (row) to consuming sector (column) | Billions of current USD, after dividing the source values by 1,000 |
-| Raw country/year sector ranking (README) | Mean of a sector's producer row average and consumer column average, across 23 partner sectors | Billions of current USD per partner sector |
+| Raw country/year sector ranking (local query) | Mean of a sector's producer row average and consumer column average, across 23 partner sectors | Billions of current USD per partner sector |
 | Sector linkage ranking | Mean of each sector's row mean and column mean in the Leontief inverse | Unitless coefficient |
 | Decision-tree feature ranking | Contribution of each matrix entry to the fitted tree's impurity reduction | Unitless importance, normalized across all features to sum to 1 |
 
 ## Raw transaction charts
 
-The README now displays a raw transaction ranking for USA, 2000. It averages the row and column means of the original domestic transaction matrix, then divides by 1,000 to convert millions to billions. It is separate from the unitless Leontief ranking retained in the modeling notebook.
+The local raw-data query can display a transaction ranking for a selected country and year, such as USA, 2000. It averages the row and column means of the original domestic transaction matrix, then divides by 1,000 to convert millions to billions. It is separate from the unitless Leontief ranking retained in the modeling notebook.
 
 `raw_sector_visualizations.py` also generates three review charts pooling all 25 countries and 36 years: producer sales (row sums), consumer purchases (column sums), and the average of those two totals. These are cumulative nominal intermediate transactions, not annual values, household consumption, gross output, or GDP. Same-sector transactions are included; international transactions and final demand are excluded. Larger economies and later nominal-dollar observations contribute more to the totals. The combined measure averages sales and purchases rather than adding them.
 
@@ -19,7 +19,7 @@ The pooled charts display **trillions of current USD**: the stored totals in bil
 
 For each sector, pooled producer sales sum its domestic row across all 25 countries and all 36 years (1965-2000); pooled consumer purchases do the same with its domestic column. Combined equals `(pooled producer + pooled consumer) / 2`. Adding the two instead would double every combined bar without changing the ranking. An average of the country/year scores across the full panel would instead equal the pooled combined total divided by `25 * 36 * 23`, in billions per partner sector per country-year.
 
-The label "Public & Other Services" abbreviates the source's public administration, education, health, and other services sector. The pooled rankings appear first in the README gallery, followed by the USA, 2000 country/year average and heatmap.
+The label "Public & Other Services" abbreviates the source's public administration, education, health, and other services sector. The pooled rankings appear first in the README gallery, followed by notebook heatmap queries for USA, China, and Germany in 2000. The country/year averages bar chart remains available locally but is not displayed in the README. All three heatmaps share a linear 0-50 billion USD scale and sector ordering; values above 50 billion saturate. Green, red, and gray palettes identify USA, China, and Germany respectively.
 
 ## Sector linkage chart (modeling notebook)
 

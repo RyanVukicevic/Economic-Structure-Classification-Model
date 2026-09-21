@@ -63,19 +63,35 @@ Each bar is **(cumulative producer sales + cumulative consumer purchases) / 2**.
 
 All three charts include same-sector transactions and exclude cross-border flows and final demand such as household purchases. They describe **gross intermediate transactions, not profit, value added, or GDP**. Values are nominal and not inflation-adjusted, so larger economies and later-year dollar amounts carry more weight. Rankings describe transaction scale rather than productivity or real growth.
 
-### A Closer Look: USA, 2000
+### Comparing Domestic Production Networks: Heatmaps for 2000
 
-![Average raw domestic sector transactions for USA, 2000, in billions of current USD](docs/images/raw-sector-averages-usa-2000.png)
+How do the individual industry relationships differ across countries? These heatmaps query the notebook for **USA, China, and Germany in 2000**, providing an Americas, Asia-Pacific, and Europe example from the regions used in our classification models. Russia is not included in this dataset.
 
-*USA, 2000: each bar averages the sector's producer row mean and consumer column mean from the original domestic transaction matrix. Values are **billions of current USD per partner sector**, averaged across 23 sectors including itself. Final demand and cross-border transactions are excluded. These are raw monetary flows, not Leontief coefficients; the Leontief-based analysis remains in the notebook.*
+Each cell shows a producing sector's sales to a consuming sector in **billions of current USD**: rows sell and columns buy. Read across a row to see a sector's buyers, or down a column to see its suppliers. These are original domestic transactions, including same-sector flows; cross-border trade and final demand are excluded.
 
-[How to read the chart units and model feature rankings](docs/reading-the-charts.md)
+All three use **the same sector order and linear $0-50 billion scale**. Light means smaller flows; dark means larger flows. Values above $50 billion share the darkest shade. Different palettes identify the countries, so compare cell positions and colorbar values rather than hues. Absolute dollar differences also reflect economy size; these are not normalized measures of economic structure.
 
-![USA's 2000 domestic interindustry transactions, with producing sectors on rows and consuming sectors on columns](docs/images/current-sector-heatmap.png)
+#### USA, 2000
 
-*The heatmap shows the individual transactions behind the USA, 2000 summary: each cell is a producing sector's sales to a consuming sector, in billions of current USD. Darker cells indicate larger flows. The fixed color scale saturates at $50 billion, so cells above that threshold share the darkest color. Reading across a row reveals buyers; reading down a column reveals suppliers.*
+![USA domestic interindustry transactions in 2000, with a light-to-dark green scale from 0 to 50 billion current USD](docs/images/heatmap-usa-2000.png)
 
-The bar charts summarize sector activity; the heatmap exposes the individual relationships behind those summaries. Regenerate these five images with `python docs/render_showcase.py` after [setting up the local dataset](docs/reproduction.md).
+*Dollar-green identifies the USA. Follow the Real Estate & Business Services and Public & Other Services rows and columns to explore their connections with the rest of the economy.*
+
+#### China, 2000
+
+![China domestic interindustry transactions in 2000, with a light-to-dark red scale from 0 to 50 billion current USD](docs/images/heatmap-chn-2000.png)
+
+*Red identifies China. Compare manufacturing-sector cells and the Construction column with the corresponding positions in the USA heatmap to explore differences in domestic supply relationships.*
+
+#### Germany, 2000
+
+![Germany domestic interindustry transactions in 2000, with a light-to-dark gray scale from 0 to 50 billion current USD](docs/images/heatmap-deu-2000.png)
+
+*Grayscale, drawing on black in Germany's flag, identifies the European example. Compare Metals, Machinery, and Transport Equipment relationships across the three countries.*
+
+Together, the pooled rankings summarize transaction scale across the full dataset, while these heatmaps reveal the individual country/year relationships from which we build economic-structure features. [More on chart units and interpretation](docs/reading-the-charts.md).
+
+Regenerate the three rankings and three notebook heatmap queries with `python docs/render_showcase.py` after [setting up the local dataset](docs/reproduction.md).
 
 ## Verified local run
 
