@@ -18,5 +18,6 @@ outputs_run.log
 outputs/failed-notebook.ipynb
 outputs/*.pdf
 outputs/*.png
+outputs/raw-sector-preview/
 .DS_Store
 Thumbs.db

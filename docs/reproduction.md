@@ -73,6 +73,25 @@ xlsx2csv -s 3 lr_wiod_wiot_wide.xlsx lr_wiod_wiot_wide.csv
 
 Check the header for `year`, `row_country`, `row_isic3`, country-prefixed industry and final-demand columns, and `xTOT_xGO` (reported gross output). The project uses Long-run WIOD version 1.1, not the separate WIOD 2016 release. Attribute the dataset as described in [credits](credits.md).
 
+## Generate the raw-dollar chart previews
+
+```bash
+python raw_sector_visualizations.py --country USA --year 2000
+```
+
+This runs independently of the ML notebook. It reads the same local CSV and writes four charts and their underlying tables to `outputs/raw-sector-preview/`: a country/year average chart and pooled producer, consumer, and combined rankings for all 25 countries over 1965-2000. The pooled previews remain local pending presentation review. The README's raw USA/2000 image is a copy of that country/year output.
+
+In a notebook, use the new raw-data query without running the classification experiments:
+
+```python
+from raw_sector_visualizations import load_panel, raw_flow_demo, plot_pooled
+panel = load_panel()
+raw_flow_demo(panel)  # Prompts for country/year
+# Or: raw_flow_demo(panel, country="USA", year=2000)
+```
+
+The original `leontief_demo()` still shows unitless coefficients; `raw_flow_demo()` shows monetary transactions. Each name retains its distinct meaning.
+
 ## Historical artifacts
 
 The presentation file has the new project name; its slides retain the original course title and results as a historical artifact. The original notebook and Python export are available in [the initial showcase commit](https://github.com/RyanVukicevic/Economic-Structure-Classification-Model/tree/1fc6abf). The current versions include local execution fixes and corrected matrix/clustering calculations, so their results need not match the slides.

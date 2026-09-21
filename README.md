@@ -55,9 +55,9 @@ The restored project ran end to end in approximately **3.6 minutes** on the loca
 
 These are exploratory rerun results after the documented corrections, with remaining evaluation limitations described below. See the [execution record](outputs/run_summary.json) for the input checksum, package versions, and recorded metrics.
 
-![Freshly executed sector linkage scores for USA, 2000](docs/images/current-sector-linkages.png)
+![Average raw domestic sector transactions for USA, 2000, in billions of current USD](docs/images/raw-sector-averages-usa-2000.png)
 
-*The country/year query also produces a sector summary. This chart averages row and column means of the Leontief matrix; it is a **unitless** descriptive linkage score, not billions of dollars or a causal importance measure. Raw WIOD transactions are in millions of current USD; the heatmap converts those transactions to billions.*
+*USA, 2000: each bar averages the sector's producer row mean and consumer column mean from the original domestic transaction matrix. Values are **billions of current USD per partner sector**, averaged across 23 sectors including itself. Final demand and cross-border transactions are excluded. These are raw monetary flows, not Leontief coefficients; the Leontief-based analysis remains in the notebook.*
 
 [How to read the chart units and model feature rankings](docs/reading-the-charts.md)
 
@@ -122,6 +122,7 @@ For interactive exploration, open `economic_structure_classification_model.ipynb
 economic_structure_classification_model.ipynb   Executed notebook
 economic_structure_classification_model.py      Synchronized Python export
 visualizations.py                               Chart labels and presentation
+raw_sector_visualizations.py                    Raw-dollar queries and review charts
 run_notebook.py                                 Fresh-kernel execution and verification
 Economic Structure Classification Model.pdf     Original team presentation
 requirements.txt                                Local dependencies

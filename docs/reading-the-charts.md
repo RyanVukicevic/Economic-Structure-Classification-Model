@@ -5,10 +5,19 @@ The project uses three different kinds of numbers. Their units are not interchan
 | Visualization | What is plotted | Scale |
 | --- | --- | --- |
 | Transaction heatmap | Domestic transactions from producing sector (row) to consuming sector (column) | Billions of current USD, after dividing the source values by 1,000 |
+| Raw country/year sector ranking (README) | Mean of a sector's producer row average and consumer column average, across 23 partner sectors | Billions of current USD per partner sector |
 | Sector linkage ranking | Mean of each sector's row mean and column mean in the Leontief inverse | Unitless coefficient |
 | Decision-tree feature ranking | Contribution of each matrix entry to the fitted tree's impurity reduction | Unitless importance, normalized across all features to sum to 1 |
 
-## Sector linkage chart
+## Raw transaction charts
+
+The README now displays a raw transaction ranking for USA, 2000. It averages the row and column means of the original domestic transaction matrix, then divides by 1,000 to convert millions to billions. It is separate from the unitless Leontief ranking retained in the modeling notebook.
+
+`raw_sector_visualizations.py` also generates three review charts pooling all 25 countries and 36 years: producer sales (row sums), consumer purchases (column sums), and the average of those two totals. These are cumulative nominal intermediate transactions, not annual values, household consumption, gross output, or GDP. Same-sector transactions are included; international transactions and final demand are excluded. Larger economies and later nominal-dollar observations contribute more to the totals. The combined measure averages sales and purchases rather than adding them.
+
+The label "Public & other services" abbreviates the source's public administration, education, health, and other services sector. The new pooled previews are saved locally for review; they are not embedded in the README.
+
+## Sector linkage chart (modeling notebook)
 
 The source [Long-run WIOD tables](https://www.rug.nl/ggdc/valuechain/long-run-wiod) report transactions in **millions of current US dollars**. However, the bar chart is computed from the Leontief inverse, not the original monetary transaction matrix.
 
