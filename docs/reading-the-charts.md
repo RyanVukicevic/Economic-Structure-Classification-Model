@@ -19,7 +19,7 @@ The pooled charts display **trillions of current USD**: the stored totals in bil
 
 For each sector, pooled producer sales sum its domestic row across all 25 countries and all 36 years (1965-2000); pooled consumer purchases do the same with its domestic column. Combined equals `(pooled producer + pooled consumer) / 2`. Adding the two instead would double every combined bar without changing the ranking. An average of the country/year scores across the full panel would instead equal the pooled combined total divided by `25 * 36 * 23`, in billions per partner sector per country-year.
 
-The label "Public & Other Services" abbreviates the source's public administration, education, health, and other services sector. The pooled rankings appear first in the README gallery, followed by notebook heatmap queries for USA, China, and Germany in 2000. The country/year averages bar chart remains available locally but is not displayed in the README. All three heatmaps share a linear 0-50 billion USD scale and sector ordering; values above 50 billion saturate. Green, red, and gray palettes identify USA, China, and Germany respectively.
+The label "Public & Other Services" abbreviates the source's public administration, education, health, and other services sector. The pooled rankings appear first in the README gallery, followed by notebook heatmap queries for USA, China, and Germany in 2000. The country/year averages bar chart remains available locally but is not displayed in the README. All three heatmaps share a linear 0-50 billion USD scale and sector ordering; values above 50 billion saturate. Green, red, and gold palettes identify USA, China, and Germany respectively.
 
 ## Sector linkage chart (modeling notebook)
 

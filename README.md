@@ -85,9 +85,9 @@ All three use **the same sector order and linear $0-50 billion scale**. Light me
 
 #### Germany, 2000
 
-![Germany domestic interindustry transactions in 2000, with a light-to-dark gray scale from 0 to 50 billion current USD](docs/images/heatmap-deu-2000.png)
+![Germany domestic interindustry transactions in 2000, with a light-to-dark gold scale from 0 to 50 billion current USD](docs/images/heatmap-deu-2000.png)
 
-*Grayscale, drawing on black in Germany's flag, identifies the European example. Compare Metals, Machinery, and Transport Equipment relationships across the three countries.*
+*Gold, drawing on Germany's flag, identifies the European example. Compare Metals, Machinery, and Transport Equipment relationships across the three countries.*
 
 Together, the pooled rankings summarize transaction scale across the full dataset, while these heatmaps reveal the individual country/year relationships from which we build economic-structure features. [More on chart units and interpretation](docs/reading-the-charts.md).
 

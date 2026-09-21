@@ -38,7 +38,7 @@ def main():
     data = pd.read_csv(ROOT / 'lr_wiod_wiot_wide.csv')
     codes = list(SECTORS)
     for country, name, palette in [('USA', 'USA', 'Greens'), ('CHN', 'China', 'Reds'),
-                                    ('DEU', 'Germany', 'Greys')]:
+                                    ('DEU', 'Germany', 'GermanyGold')]:
         context['heatmap'](country, 2000, vmin=0, vmax=50)
         fig = plt.gcf()
         ax = fig.axes[0]
@@ -49,6 +49,8 @@ def main():
         np.testing.assert_allclose(np.asarray(mesh.get_array()).reshape(23, 23), expected)
         if country == 'CHN':
             palette = LinearSegmentedColormap.from_list('ChinaRed', ['#fff7f7', '#df5555', '#790000'])
+        elif country == 'DEU':
+            palette = LinearSegmentedColormap.from_list('GermanyGold', ['#fffde7', '#e6c600', '#756000'])
         mesh.set_cmap(palette)
         mesh.colorbar.set_label('Billions of Current USD (50+ Saturates)')
         fig.set_size_inches(14, 12)
